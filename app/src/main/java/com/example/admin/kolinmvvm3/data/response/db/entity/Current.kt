@@ -4,6 +4,9 @@ import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
+
+const val current_id = 0
+
 @Entity(tableName = "current_weather")
 data class Current(
         @SerializedName("cloud")
@@ -48,7 +51,7 @@ data class Current(
         val windKph: Double,
         @SerializedName("wind_mph")
         val windMph: Double
-){
+) {
     @PrimaryKey(autoGenerate = false)
-    var id:Int= 0
+    var id: Int = current_id
 }
