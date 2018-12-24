@@ -1,4 +1,4 @@
-package com.example.admin.kolinmvvm3.data.response.db.unitlocalized
+package com.example.admin.kolinmvvm3.data.db.unitlocalized
 
 import androidx.room.ColumnInfo
 

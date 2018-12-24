@@ -1,4 +1,4 @@
-package com.example.admin.kolinmvvm3.data.response.db.entity
+package com.example.admin.kolinmvvm3.data.db.entity
 
 import com.google.gson.annotations.SerializedName
 

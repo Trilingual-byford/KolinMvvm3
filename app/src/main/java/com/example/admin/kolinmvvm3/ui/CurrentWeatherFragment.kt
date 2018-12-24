@@ -6,8 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import com.example.admin.kolinmvvm3.R
 import com.example.admin.kolinmvvm3.data.ApixvApiService
+import com.example.admin.kolinmvvm3.data.response.network.ConnectivityIntercept
+import com.example.admin.kolinmvvm3.data.response.network.ConnectivityInterceptImpl
+import com.example.admin.kolinmvvm3.data.response.network.WeatherNetworkDataSourceImpl
 import kotlinx.android.synthetic.main.current_weather_fragment.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -30,11 +34,15 @@ class CurrentWeatherFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(CurrentWeatherViewModel::class.java)
-        val invoke = ApixvApiService.invoke()
-        val currentWeather = invoke.getCurrentWeather("London")
-        GlobalScope.launch(Dispatchers.Main){
-            current.setText(currentWeather.await().current.toString())
 
+        val api = ApixvApiService.invoke(ConnectivityInterceptImpl(this.context!!))
+        val weatherNetworkDataSourceImpl = WeatherNetworkDataSourceImpl(apixuWeatherService = api)
+        weatherNetworkDataSourceImpl.downLoadedCurrentWeather.observe(this, Observer {
+            current.setText(it.toString())
+        } )
+
+        GlobalScope.launch(Dispatchers.Main){
+            weatherNetworkDataSourceImpl.fetchCurrentWeather("BeiJing","en")
         }
         // TODO: Use the ViewModel
     }

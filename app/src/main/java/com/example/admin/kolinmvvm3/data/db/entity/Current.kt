@@ -1,4 +1,4 @@
-package com.example.admin.kolinmvvm3.data.response.db.entity
+package com.example.admin.kolinmvvm3.data.db.entity
 
 import androidx.room.Embedded
 import androidx.room.Entity

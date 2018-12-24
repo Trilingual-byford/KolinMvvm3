@@ -1,4 +1,4 @@
-package com.example.admin.kolinmvvm3.data.response.db.unitlocalized
+package com.example.admin.kolinmvvm3.data.db.unitlocalized
 
 interface UnitSpecificCurrentWeatherEntry {
     val temperture: Double

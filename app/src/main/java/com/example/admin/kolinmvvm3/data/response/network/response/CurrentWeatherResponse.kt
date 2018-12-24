@@ -1,7 +1,7 @@
 package com.example.admin.kolinmvvm3.data.response.network.response
 
-import com.example.admin.kolinmvvm3.data.response.db.entity.Current
-import com.example.admin.kolinmvvm3.data.response.db.entity.Location
+import com.example.admin.kolinmvvm3.data.db.entity.Current
+import com.example.admin.kolinmvvm3.data.db.entity.Location
 import com.google.gson.annotations.SerializedName
 
 data class CurrentWeatherResponse(

@@ -1,5 +1,6 @@
 package com.example.admin.kolinmvvm3.data
 
+import com.example.admin.kolinmvvm3.data.response.network.ConnectivityIntercept
 import com.example.admin.kolinmvvm3.data.response.network.response.CurrentWeatherResponse
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import kotlinx.coroutines.Deferred
@@ -22,7 +23,9 @@ interface ApixvApiService {
     ): Deferred<CurrentWeatherResponse>
 
     companion object {
-        operator fun invoke(): ApixvApiService {
+        operator fun invoke(
+                connectivityIntercept : ConnectivityIntercept
+        ): ApixvApiService {
             val Interceptor = Interceptor { chain ->
                 val url = chain.request()
                         .url()
@@ -37,6 +40,7 @@ interface ApixvApiService {
             }
             val httpClient = OkHttpClient.Builder()
                     .addInterceptor(Interceptor)
+                    .addInterceptor(connectivityIntercept)
                     .build()
             return Retrofit.Builder()
                     .client(httpClient)
